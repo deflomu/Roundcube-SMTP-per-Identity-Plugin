@@ -45,6 +45,7 @@ class identity_smtp extends rcube_plugin
 
 		$form = $form + $smtpSettingsForm;
 
+		# Load the stored smtp settings
 		$smtpSettingsRecord = array(
 			'smtp_standard'		=> '1',
 			'smtp_server'  		=> 'test',
@@ -63,18 +64,19 @@ class identity_smtp extends rcube_plugin
 		return $OUTPUT;
 	}
 
+# This function is called when a new identity is created. We want to use the default smtp server here
 	function addSmtpSettingsToRecord($args)
 	{
-		write_log("identity.log",$args["record"]);
 		return $args;
 	}
 
+# This function is called when the users saves a changed identity. It is responsible for saving the smtp settings
 	function saveSmtpSettings($args)
 	{
-		write_log("identity.log",$args["record"]);
 		return $args;
 	}
 
+# This function is called when an email is sent and it should pull the correct smtp settings for the used identity and insert them
 	function setSmtpPerIdentity($args)
 	{
 		return $args;
