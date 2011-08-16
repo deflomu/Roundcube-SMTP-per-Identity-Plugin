@@ -25,6 +25,16 @@ class identity_smtp extends rcube_plugin
 		$this->add_hook('identity_update', array($this, 'saveSmtpSettings'));
 	}
 
+	function saveSmtpSettings($args)
+	{
+
+	}
+
+	function loadSmtpSettings($args)
+	{
+		return null;
+	}
+
 	function addSmtpSettingsToIdentityForm($args)
 	{
 		$form = $args['form'];
@@ -34,7 +44,7 @@ class identity_smtp extends rcube_plugin
 			'name' => $this->gettext('smtp_settings_header'),
 			'content' => array(
 				'smtp_standard'		=> array('type' => 'checkbox', 'label' => $this->gettext('use_default_smtp_server')),
-				'smtp_server'  		=> array('type' => 'text'),
+				'smtp_server'			=> array('type' => 'text'),
 				'smtp_port'				=> array('type' => 'text'),
 				'smtp_user'				=> array('type' => 'text'),
 				'smtp_pass'				=> array('type' => 'text'),
@@ -48,7 +58,7 @@ class identity_smtp extends rcube_plugin
 		# Load the stored smtp settings
 		$smtpSettingsRecord = array(
 			'smtp_standard'		=> '1',
-			'smtp_server'  		=> 'test',
+			'smtp_server'			=> 'test',
 			'smtp_port'				=> '',
 			'smtp_user'				=> '',
 			'smtp_pass'				=> '',
