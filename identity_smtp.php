@@ -29,7 +29,7 @@ class identity_smtp extends rcube_plugin
 
 	function smtpLog($message)
 	{
-		write_log("identity_smtp_plugin", $message)
+		write_log("identity_smtp_plugin", $message);
 	}
 
 	function saveSmtpSettings($args)
@@ -75,7 +75,7 @@ class identity_smtp extends rcube_plugin
 		$form = $form + $smtpSettingsForm;
 
 		# Load the stored smtp settings
-		$smtpSettingsRecord = loadSmtpSettings(null);
+		$smtpSettingsRecord = $this->loadSmtpSettings(null);
 
 		$record = $record + $smtpSettingsRecord;
 
@@ -94,6 +94,7 @@ class identity_smtp extends rcube_plugin
 # This function is called when the users saves a changed identity. It is responsible for saving the smtp settings
 	function identityWasUpdated($args)
 	{
+		$this->smtpLog($args);
 		#get_input_value('myvar', RCUBE_INPUT_POST);
 		return $args;
 	}
