@@ -27,11 +27,13 @@ class identity_smtp extends rcube_plugin
 
 	function saveSmtpSettings($args)
 	{
-
+		#rcmail::get_instance()->user->save_prefs(array('key' => $value));
 	}
 
 	function loadSmtpSettings($args)
 	{
+
+		#$value = rcmail::get_instance()->config->get('key');
 		$smtpSettingsRecord = array(
 			'smtp_standard'		=> '',
 			'smtp_server'			=> '',
@@ -85,6 +87,7 @@ class identity_smtp extends rcube_plugin
 # This function is called when the users saves a changed identity. It is responsible for saving the smtp settings
 	function saveSmtpSettings($args)
 	{
+		#get_input_value('myvar', RCUBE_INPUT_POST);
 		return $args;
 	}
 
