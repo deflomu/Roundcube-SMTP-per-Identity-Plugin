@@ -19,10 +19,10 @@ class identity_smtp extends rcube_plugin
 
 	function init()
 	{
-		$this->add_hook('smtp_connect', array($this, 'setSmtpPerIdentity'));
-		$this->add_hook('identity_form', array($this, 'addSmtpSettingsToIdentityForm'));
-		$this->add_hook('identity_create', array($this, 'addSmtpSettingsToRecord'));
-		$this->add_hook('identity_update', array($this, 'saveSmtpSettings'));
+		$this->add_hook('smtp_connect', array($this, 'smtpWillConnect'));
+		$this->add_hook('identity_form', array($this, 'identityFormWillBeDisplayed'));
+		$this->add_hook('identity_create', array($this, 'identityWasCreated'));
+		$this->add_hook('identity_update', array($this, 'identityWasUpdated'));
 	}
 
 	function saveSmtpSettings($args)
@@ -47,7 +47,7 @@ class identity_smtp extends rcube_plugin
 		return $smtpSettingsRecord;
 	}
 
-	function addSmtpSettingsToIdentityForm($args)
+	function identityFormWillBeDisplayed($args)
 	{
 		$form = $args['form'];
 		$record = $args['record'];
@@ -79,20 +79,20 @@ class identity_smtp extends rcube_plugin
 	}
 
 # This function is called when a new identity is created. We want to use the default smtp server here
-	function addSmtpSettingsToRecord($args)
+	function identityWasCreated($args)
 	{
 		return $args;
 	}
 
 # This function is called when the users saves a changed identity. It is responsible for saving the smtp settings
-	function saveSmtpSettings($args)
+	function identityWasUpdated($args)
 	{
 		#get_input_value('myvar', RCUBE_INPUT_POST);
 		return $args;
 	}
 
 # This function is called when an email is sent and it should pull the correct smtp settings for the used identity and insert them
-	function setSmtpPerIdentity($args)
+	function smtpWillConnect($args)
 	{
 		return $args;
 	}
