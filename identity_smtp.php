@@ -32,7 +32,17 @@ class identity_smtp extends rcube_plugin
 
 	function loadSmtpSettings($args)
 	{
-		return null;
+		$smtpSettingsRecord = array(
+			'smtp_standard'		=> '',
+			'smtp_server'			=> '',
+			'smtp_port'				=> '',
+			'smtp_user'				=> '',
+			'smtp_pass'				=> '',
+			'smtp_auth_type'	=> '',
+			'smtp_helo_host'	=> ''
+		);
+
+		return $smtpSettingsRecord;
 	}
 
 	function addSmtpSettingsToIdentityForm($args)
@@ -56,15 +66,7 @@ class identity_smtp extends rcube_plugin
 		$form = $form + $smtpSettingsForm;
 
 		# Load the stored smtp settings
-		$smtpSettingsRecord = array(
-			'smtp_standard'		=> '1',
-			'smtp_server'			=> 'test',
-			'smtp_port'				=> '',
-			'smtp_user'				=> '',
-			'smtp_pass'				=> '',
-			'smtp_auth_type'	=> '',
-			'smtp_helo_host'	=> ''
-		);
+		$smtpSettingsRecord = loadSmtpSettings(null);
 
 		$record = $record + $smtpSettingsRecord;
 
