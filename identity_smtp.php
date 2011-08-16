@@ -19,10 +19,17 @@ class identity_smtp extends rcube_plugin
 
 	function init()
 	{
+#	$this->add_hook('message_outgoing_headers', array($this, 'messageOutgoingHeaders'));
 		$this->add_hook('smtp_connect', array($this, 'smtpWillConnect'));
 		$this->add_hook('identity_form', array($this, 'identityFormWillBeDisplayed'));
 		$this->add_hook('identity_create', array($this, 'identityWasCreated'));
 		$this->add_hook('identity_update', array($this, 'identityWasUpdated'));
+		$this->add_hook('identity_delete', array($this, 'identityWasDeleted'));
+	}
+
+	function smtpLog($message)
+	{
+		write_log("identity_smtp_plugin", $message)
 	}
 
 	function saveSmtpSettings($args)
@@ -90,6 +97,17 @@ class identity_smtp extends rcube_plugin
 		#get_input_value('myvar', RCUBE_INPUT_POST);
 		return $args;
 	}
+	function identityWasDeleted($id)
+	{
+		# Return false to not abort the deletion of the identity
+		return false;
+	}
+
+	function messageOutgoingHeaders($args)
+	{
+		
+	}
+
 
 # This function is called when an email is sent and it should pull the correct smtp settings for the used identity and insert them
 	function smtpWillConnect($args)
