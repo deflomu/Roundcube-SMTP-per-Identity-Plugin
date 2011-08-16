@@ -27,13 +27,19 @@ class identity_smtp extends rcube_plugin
 
 	function saveSmtpSettings($args)
 	{
-		#rcmail::get_instance()->user->save_prefs(array('key' => $value));
+		$identities = rcmail::get_instance()->config->get('identity_smpt');
+
+		if ($identities->) {
+			rcmail::get_instance()->user->save_prefs(array('identity_smtp' => null));
+	}	
+		rcmail::get_instance()->user->save_prefs(array('identity_smtp' => $args));
 	}
 
 	function loadSmtpSettings($args)
 	{
 
-		#$value = rcmail::get_instance()->config->get('key');
+		$currentSettings = rcmail::get_instance()->config->get('identity_smpt');
+		
 		$smtpSettingsRecord = array(
 			'smtp_standard'		=> '',
 			'smtp_server'			=> '',
@@ -81,6 +87,7 @@ class identity_smtp extends rcube_plugin
 # This function is called when a new identity is created. We want to use the default smtp server here
 	function identityWasCreated($args)
 	{
+
 		return $args;
 	}
 
