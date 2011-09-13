@@ -21,6 +21,7 @@ class identity_smtp extends rcube_plugin
 	function init()
 	{
 		$this->include_script('identity_smtp.js');
+		$this->add_texts('localization/', true);
 
 		$this->add_hook('message_outgoing_headers', array($this, 'messageOutgoingHeaders'));
 		$this->add_hook('smtp_connect', array($this, 'smtpWillConnect'));
@@ -119,12 +120,24 @@ class identity_smtp extends rcube_plugin
 									'label' => $this->gettext('use_default_smtp_server'),
 									'onclick' => 'identity_smtp_toggle_standard_server()'
 								),
-					'smtp_server'		=> array('type' => 'text', 'class' => 'identity_smtp_form'),
-					'smtp_port'		=> array('type' => 'text', 'class' => 'identity_smtp_form'),
-					'smtp_user'		=> array('type' => 'text', 'class' => 'identity_smtp_form'),
-					'smtp_pass'		=> array('type' => 'text', 'class' => 'identity_smtp_form'),
-					'smtp_auth_type'	=> array('type' => 'text', 'class' => 'identity_smtp_form'),
-					'smtp_helo_host'	=> array('type' => 'text', 'class' => 'identity_smtp_form')
+					'smtp_server'		=> array('type' => 'text',
+									'label' => $this->gettext('smtp_server'), 
+									'class' => 'identity_smtp_form'),
+					'smtp_port'		=> array('type' => 'text',
+									'label' => $this->gettext('smtp_port'),
+									'class' => 'identity_smtp_form'),
+					'smtp_user'		=> array('type' => 'text',
+                                                                        'label' => $this->gettext('smtp_user'),
+									'class' => 'identity_smtp_form'),
+					'smtp_pass'		=> array('type' => 'text',
+									'label' => $this->gettext('smtp_pass'),
+									'class' => 'identity_smtp_form'),
+					'smtp_auth_type'	=> array('type' => 'text',
+									'label' =>  $this->gettext('smtp_auth_type'),
+									'class' => 'identity_smtp_form'),
+					'smtp_helo_host'	=> array('type' => 'text',
+									'label' =>  $this->gettext('smtp_helo_host'),
+									'class' => 'identity_smtp_form')
 				)
 			));
 			$this->smtpLog($smtpSettingsForm);
