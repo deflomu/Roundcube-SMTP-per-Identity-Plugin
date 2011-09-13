@@ -210,7 +210,7 @@ class identity_smtp extends rcube_plugin
 	# FIX ME: Open a bug at trac.roundcube.net
 	function template_object_identityform($args)
 	{
-		$args['content'] = preg_replace('#<input type="text" ([a-zA-Z0-9="_ ]+) name="_smtp_pass" />#', '<input type="password" ${1} name="_smtp_pass" />' , $args['content']);
+		$args['content'] = preg_replace('#<input([a-zA-Z0-9=+/"_ ]*)type="text"([a-zA-Z0-9=+/"_ ]*)name="_smtp_pass"([a-zA-Z0-9=+/"_ ]*)/>#', '<input${1}type="password"${2}name="_smtp_pass"${3}/>' , $args['content']);
 		return $args;
 	}
 }
