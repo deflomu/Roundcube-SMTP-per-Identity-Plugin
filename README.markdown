@@ -8,7 +8,7 @@ This plugin works for me but it is not tested very well. Patches are welcome.
 INSTALLATION
 ============
 
-Place the plugin in the roundcubes plugin folder.
+Place the plugin in the roundcubes plugin folder. The plugins folder must be named identity_smtp.
 
 USAGE
 =====
