@@ -6,12 +6,12 @@
  * Description
  *
  * @version 0.1
- * @author skweez.net
+ * @author elm@skweez.net, ritze@skweez.net, mks@skweez.net
  * @url skweez.net
  *
  * MIT License
  *
- */
+ **/
 
 class identity_smtp extends rcube_plugin
 {
