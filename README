@@ -1,1 +1,18 @@
 roundcube-identity-smtp-plugin
+==============================
+
+This plugin allows to setup identities with different smtp servers than the servers default.
+
+This plugin works for me but it is not tested very well. Patches are welcome.
+
+INSTALLATION
+============
+
+Place the plugin in the roundcubes plugin folder.
+
+USAGE
+=====
+
+In the indentities settings you can specify an alternative smtp server for every identity to send mails. When composing a mail just choose the identity you want to use to send a mail.
+
+You can contact me at elm -at- skweez.net
