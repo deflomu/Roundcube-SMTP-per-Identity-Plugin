@@ -7,8 +7,6 @@ $labels['smtp_server'] = 'Server IP/Hostname';
 $labels['smtp_port'] = 'Server Port';
 $labels['smtp_user'] = 'Username';
 $labels['smtp_pass'] = 'Password';
-$labels['smtp_auth_type'] = 'Server Auth Type (optional)';
-$labels['smtp_helo_host'] = 'SMTP Helo Hostname (optional)';
 $labels['smtp_settings_not_available'] = 'Please save first to edit the SMTP settings.';
 
 ?>
