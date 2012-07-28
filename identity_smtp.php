@@ -60,9 +60,7 @@ class identity_smtp extends rcube_plugin
 			'smtp_server'		=> get_input_value('_smtp_server', RCUBE_INPUT_POST),
 			'smtp_port'		=> get_input_value('_smtp_port', RCUBE_INPUT_POST),
 			'smtp_user'		=> get_input_value('_smtp_user', RCUBE_INPUT_POST),
-			'smtp_pass'		=> $password,
-			'smtp_auth_type'	=> get_input_value('_smtp_auth_type', RCUBE_INPUT_POST),
-			'smtp_helo_host'	=> get_input_value('_smtp_helo_host', RCUBE_INPUT_POST)
+			'smtp_pass'		=> $password
 		);
 	
 		unset($identities[$id]);
@@ -80,9 +78,7 @@ class identity_smtp extends rcube_plugin
 			'smtp_server'		=> $smtpSettings[$id]['smtp_server'],
 			'smtp_port'		=> $smtpSettings[$id]['smtp_port'],
 			'smtp_user'		=> $smtpSettings[$id]['smtp_user'],
-			'smtp_pass'		=> $smtpSettings[$id]['smtp_pass'],
-			'smtp_auth_type'	=> $smtpSettings[$id]['smtp_auth_type'],
-			'smtp_helo_host'	=> $smtpSettings[$id]['smtp_helo_host']
+			'smtp_pass'		=> $smtpSettings[$id]['smtp_pass']
 		);
 
 		if (is_null($smtpSettingsRecord['smtp_standard'])) {
@@ -128,12 +124,6 @@ class identity_smtp extends rcube_plugin
 									'class' => 'identity_smtp_form'),
 					'smtp_pass'		=> array('type' => 'password',
 									'label' => $this->gettext('smtp_pass'),
-									'class' => 'identity_smtp_form'),
-					'smtp_auth_type'	=> array('type' => 'text',
-									'label' =>  $this->gettext('smtp_auth_type'),
-									'class' => 'identity_smtp_form'),
-					'smtp_helo_host'	=> array('type' => 'text',
-									'label' =>  $this->gettext('smtp_helo_host'),
 									'class' => 'identity_smtp_form')
 				)
 			));
@@ -195,13 +185,12 @@ class identity_smtp extends rcube_plugin
 	function smtpWillConnect($args)
 	{
 		$smtpSettings = $this->loadSmtpSettings(array('identity_id' => $this->from_identity));
+		$this->smtpLog('Identity actually used: '.$this->from_identity);
 		if (!$smtpSettings['smtp_standard'] && !is_null($smtpSettings['smtp_standard'])) {
 			$args['smtp_server'] = $smtpSettings['smtp_server'];
 			$args['smtp_port'] = $smtpSettings['smtp_port'];
 			$args['smtp_user'] = $smtpSettings['smtp_user'];
 			$args['smtp_pass'] = rcmail::get_instance()->decrypt($smtpSettings['smtp_pass']);
-			$args['smtp_auth_type'] = $smtpSettings['smtp_auth_type'];
-			$args['smtp_helo_host'] = $smtpSettings['smtp_helo_host'];
 		}
 		return $args;
 	}
