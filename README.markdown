@@ -12,6 +12,8 @@ Installation
 
 The plugins folder must be named identity_smtp.
 
+Add `identity_smtp` to `$rcmail_config['plugins']` in `config/main.inc.php`.
+
 Usage
 =====
 In the indentities settings you can specify an alternative smtp server for every identity to send mails. When composing a mail just choose the identity you want to use to send a mail.
