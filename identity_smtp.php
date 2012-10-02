@@ -185,7 +185,6 @@ class identity_smtp extends rcube_plugin
 	function smtpWillConnect($args)
 	{
 		$smtpSettings = $this->loadSmtpSettings(array('identity_id' => $this->from_identity));
-		$this->smtpLog('Identity actually used: '.$this->from_identity);
 		if (!$smtpSettings['smtp_standard'] && !is_null($smtpSettings['smtp_standard'])) {
 			$args['smtp_server'] = $smtpSettings['smtp_server'];
 			$args['smtp_port'] = $smtpSettings['smtp_port'];
