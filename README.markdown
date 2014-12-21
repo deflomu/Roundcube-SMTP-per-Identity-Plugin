@@ -4,10 +4,15 @@ identity_smtp Roundcube Plugin
 This roundcube plugin allows to setup identities with different smtp servers
 than the servers default.
 
-This plugin works for me but it is not tested very well. Patches are welcome.
-
 Installation
 ============
+
+This plugin is available in the [Roundcube Plugin
+repository](http://plugins.roundcube.net/packages/elm/identity_smtp).
+
+Manual Installation
+-------------------
+
     $ cd /path/to/roundcube/plugins
     $ git clone git://github.com/elm/Roundcube-SMTP-per-Identity-Plugin.git identity_smtp
 

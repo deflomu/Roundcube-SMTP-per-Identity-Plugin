@@ -1,5 +1,5 @@
 {
-    "name": "elm/identity-smtp",
+    "name": "elm/identity_smtp",
     "description": "Individual SMTP settings for every identity",
     "keywords": ["mail","smtp","settings","identity"],
     "homepage": "https://github.com/elm/Roundcube-SMTP-per-Identity-Plugin",
