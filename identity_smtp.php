@@ -49,7 +49,7 @@ class identity_smtp extends rcube_plugin
 
 		$smtp_standard = get_input_value('_smtp_standard', RCUBE_INPUT_POST);
 
-		$password = get_input_value('_smtp_pass', RCUBE_INPUT_POST);
+		$password = get_input_value('_smtp_pass', RCUBE_INPUT_POST, true);
 		
 		if ($password != $identities[$id]['smtp_pass']) {
 			$password = rcmail::get_instance()->encrypt($password);
