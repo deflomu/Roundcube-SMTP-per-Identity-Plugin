@@ -15,7 +15,7 @@
 
 class identity_smtp extends rcube_plugin
 {
-	public $task = 'mail|settings|calendar';
+	public $task = 'mail|settings';
 	private $from_identity;
 
 	function init()
