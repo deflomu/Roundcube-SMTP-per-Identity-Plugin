@@ -23,7 +23,7 @@ class identity_smtp extends rcube_plugin
 		$this->include_script('identity_smtp.js');
 		$this->add_texts('localization/', true);
 
-		$this->add_hook('message_outgoing_headers', array($this, 'messageOutgoingHeaders'));
+		$this->add_hook('message_before_send', array($this, 'messageBeforeSend'));
 		$this->add_hook('smtp_connect', array($this, 'smtpWillConnect'));
 		$this->add_hook('identity_form', array($this, 'identityFormWillBeDisplayed'));
 		$this->add_hook('identity_create', array($this, 'identityWasCreated'));
@@ -50,7 +50,6 @@ class identity_smtp extends rcube_plugin
 		$smtp_standard = get_input_value('_smtp_standard', RCUBE_INPUT_POST);
 
 		$password = get_input_value('_smtp_pass', RCUBE_INPUT_POST, true);
-		
 		if ($password != $identities[$id]['smtp_pass']) {
 			$password = rcmail::get_instance()->encrypt($password);
 		}
@@ -65,7 +64,6 @@ class identity_smtp extends rcube_plugin
 	
 		unset($identities[$id]);
 		$identities += array( $id => $smtpSettingsRecord );
-
 		rcmail::get_instance()->user->save_prefs(array('identity_smtp' => $identities));
 	}
 
@@ -169,15 +167,14 @@ class identity_smtp extends rcube_plugin
 		return false;
 	}
 
-	function messageOutgoingHeaders($args)
+	function messageBeforeSend($args)
 	{
 		$identities = rcmail::get_instance()->user->list_identities();
 		foreach ($identities as $idx => $ident) {
-			if ($identities[$idx]['email'] == $args['headers']['X-Sender']) {
+			if ($identities[$idx]['email'] == $args['from']) {
 				$this->from_identity = $identities[$idx]['identity_id'];
 			}
 		}
-
 		return $args;
 	}
 
