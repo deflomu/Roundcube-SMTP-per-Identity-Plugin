@@ -34,7 +34,7 @@ class identity_smtp extends rcube_plugin
 
 	function smtpLog($message)
 	{
-		write_log("identity_smtp_plugin", $message);
+        rcube::write_log("identity_smtp_plugin", $message);
 	}
 
 	function saveSmtpSettings($args)
@@ -42,23 +42,22 @@ class identity_smtp extends rcube_plugin
 		$identities = rcmail::get_instance()->config->get('identity_smtp');
 		$id = intval($args['id']);
 
-		if (!isset($identities))
-		{
+		if (!isset($identities)) {
 			$identities = array();
 		}	
 
-		$smtp_standard = get_input_value('_smtp_standard', RCUBE_INPUT_POST);
+		$smtp_standard = rcube_utils::get_input_value('_smtp_standard', rcube_utils::INPUT_POST);
 
-		$password = get_input_value('_smtp_pass', RCUBE_INPUT_POST, true);
+		$password = rcube_utils::get_input_value('_smtp_pass', rcube_utils::INPUT_POST, true);
 		if ($password != $identities[$id]['smtp_pass']) {
 			$password = rcmail::get_instance()->encrypt($password);
 		}
 
 		$smtpSettingsRecord = array(
 			'smtp_standard'		=> isset($smtp_standard),
-			'smtp_server'		=> get_input_value('_smtp_server', RCUBE_INPUT_POST),
-			'smtp_port'		=> get_input_value('_smtp_port', RCUBE_INPUT_POST),
-			'smtp_user'		=> get_input_value('_smtp_user', RCUBE_INPUT_POST),
+			'smtp_server'		=> rcube_utils::get_input_value('_smtp_server', rcube_utils::INPUT_POST),
+			'smtp_port'		=> rcube_utils::get_input_value('_smtp_port', rcube_utils::INPUT_POST),
+			'smtp_user'		=> rcube_utils::get_input_value('_smtp_user', rcube_utils::INPUT_POST),
 			'smtp_pass'		=> $password
 		);
 	
@@ -122,7 +121,7 @@ class identity_smtp extends rcube_plugin
 									'class' => 'identity_smtp_form'),
 					'smtp_pass'		=> array('type' => 'password',
 									'label' => $this->gettext('smtp_pass'),
-									'class' => 'identity_smtp_form')
+                                    'class' => 'identity_smtp_form')
 				)
 			));
 			if ($smtpSettingsRecord['smtp_standard'] || is_null($smtpSettingsRecord['smtp_standard'])) {
