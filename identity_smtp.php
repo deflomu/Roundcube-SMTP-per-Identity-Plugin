@@ -234,13 +234,5 @@ class identity_smtp extends rcube_plugin
         }
         return $args;
     }
-    
-    // Ugly hack to make the password field a password field...
-    // FIX ME: Open a bug at trac.roundcube.net
-    function template_object_identityform($args)
-    {
-        $args['content'] = preg_replace('#<input([a-zA-Z0-9=+/"_ ]*)type="text"([a-zA-Z0-9=+/"_ ]*)name="_smtp_pass"([a-zA-Z0-9=+/"_ ]*)/>#', '<input${1}type="password"${2}name="_smtp_pass"${3}/>', $args['content']);
-        return $args;
-    }
 }
 ?>
