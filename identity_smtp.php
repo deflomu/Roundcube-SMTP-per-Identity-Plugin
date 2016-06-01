@@ -17,12 +17,12 @@ class identity_smtp extends rcube_plugin
 {
     public $task = 'mail|settings';
     private $from_identity;
-    
+
     function init()
     {
         $this->include_script('identity_smtp.js');
         $this->add_texts('localization/', true);
-        
+
         $this->add_hook('message_before_send', array(
             $this,
             'messageBeforeSend'
@@ -52,28 +52,28 @@ class identity_smtp extends rcube_plugin
             'template_object_identityform'
         ));
     }
-    
+
     function smtpLog($message)
     {
         rcube::write_log("identity_smtp_plugin", $message);
     }
-    
+
     function saveSmtpSettings($args)
     {
         $identities = rcmail::get_instance()->config->get('identity_smtp');
         $id         = intval($args['id']);
-        
+
         if (!isset($identities)) {
             $identities = array();
         }
-        
+
         $smtp_standard = rcube_utils::get_input_value('_smtp_standard', rcube_utils::INPUT_POST);
-        
+
         $password = rcube_utils::get_input_value('_smtp_pass', rcube_utils::INPUT_POST, true);
         if ($password != $identities[$id]['smtp_pass']) {
             $password = rcmail::get_instance()->encrypt($password);
         }
-        
+
         $smtpSettingsRecord = array(
             'smtp_standard' => isset($smtp_standard),
             'smtp_server' => rcube_utils::get_input_value('_smtp_server', rcube_utils::INPUT_POST),
@@ -81,7 +81,7 @@ class identity_smtp extends rcube_plugin
             'smtp_user' => rcube_utils::get_input_value('_smtp_user', rcube_utils::INPUT_POST),
             'smtp_pass' => $password
         );
-        
+
         unset($identities[$id]);
         $identities += array(
             $id => $smtpSettingsRecord
@@ -90,7 +90,7 @@ class identity_smtp extends rcube_plugin
             'identity_smtp' => $identities
         ));
     }
-    
+
     function loadSmtpSettings($args)
     {
         $smtpSettings       = rcmail::get_instance()->config->get('identity_smtp');
@@ -102,22 +102,22 @@ class identity_smtp extends rcube_plugin
             'smtp_user' => $smtpSettings[$id]['smtp_user'],
             'smtp_pass' => $smtpSettings[$id]['smtp_pass']
         );
-        
+
         if (is_null($smtpSettingsRecord['smtp_standard'])) {
             $smtpSettingsRecord['smtp_standard'] = true;
         }
-        
+
         return $smtpSettingsRecord;
     }
-    
+
     function identityFormWillBeDisplayed($args)
     {
         $form   = $args['form'];
         $record = $args['record'];
-        
+
         // Load the stored smtp settings
         $smtpSettingsRecord = $this->loadSmtpSettings($record);
-        
+
         if (!isset($record['identity_id'])) {
             // FIX ME
             $smtpSettingsForm = array(
@@ -174,28 +174,28 @@ class identity_smtp extends rcube_plugin
         }
         $form   = $form + $smtpSettingsForm;
         $record = $record + $smtpSettingsRecord;
-        
+
         $OUTPUT = array(
             'form' => $form,
             'record' => $record
         );
         return $OUTPUT;
     }
-    
+
     // This function is called when a new identity is created. We want to use the default smtp server here
     function identityWasCreated($args)
     {
         $this->saveSmtpSettings($args);
         return $args;
     }
-    
+
     // This function is called when the users saves a changed identity. It is responsible for saving the smtp settings
     function identityWasUpdated($args)
     {
         $this->saveSmtpSettings($args);
         return $args;
     }
-    
+
     function identityWasDeleted($args)
     {
         $smtpSettings = rcmail::get_instance()->config->get('identity_smtp');
@@ -204,11 +204,11 @@ class identity_smtp extends rcube_plugin
         rcmail::get_instance()->user->save_prefs(array(
             'identity_smtp' => $smtpSettings
         ));
-        
+
         // Return false to not abort the deletion of the identity
         return false;
     }
-    
+
     function messageBeforeSend($args)
     {
         $identities = rcmail::get_instance()->user->list_identities();
@@ -219,7 +219,7 @@ class identity_smtp extends rcube_plugin
         }
         return $args;
     }
-    
+
     // This function is called when an email is sent and it should pull the correct smtp settings for the used identity and insert them
     function smtpWillConnect($args)
     {
