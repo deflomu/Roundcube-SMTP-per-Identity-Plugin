@@ -70,6 +70,15 @@ class identity_smtp extends rcube_plugin
         $smtp_standard = rcube_utils::get_input_value('_smtp_standard', rcube_utils::INPUT_POST);
 
         $password = rcube_utils::get_input_value('_smtp_pass', rcube_utils::INPUT_POST, true);
+        $password2 = rcube_utils::get_input_value('_smtp_pass2', rcube_utils::INPUT_POST, true);
+
+        if ($password != $password2) {
+            $args['abort'] = true;
+            $args['result'] = false;
+            $args['message'] = $this->gettext('smtp_passwords_mismatch');
+            return $args;
+        }
+
         if ($password != $identities[$id]['smtp_pass']) {
             $password = rcmail::get_instance()->encrypt($password);
         }
@@ -89,6 +98,8 @@ class identity_smtp extends rcube_plugin
         rcmail::get_instance()->user->save_prefs(array(
             'identity_smtp' => $identities
         ));
+
+        return $args;
     }
 
     function loadSmtpSettings($args)
@@ -100,7 +111,8 @@ class identity_smtp extends rcube_plugin
             'smtp_server' => $smtpSettings[$id]['smtp_server'],
             'smtp_port' => $smtpSettings[$id]['smtp_port'],
             'smtp_user' => $smtpSettings[$id]['smtp_user'],
-            'smtp_pass' => $smtpSettings[$id]['smtp_pass']
+            'smtp_pass' => $smtpSettings[$id]['smtp_pass'],
+            'smtp_pass2' => $smtpSettings[$id]['smtp_pass']
         );
 
         if (is_null($smtpSettingsRecord['smtp_standard'])) {
@@ -144,7 +156,8 @@ class identity_smtp extends rcube_plugin
                         'smtp_server' => array(
                             'type' => 'text',
                             'label' => $this->gettext('smtp_server'),
-                            'class' => 'identity_smtp_form'
+                            'class' => 'identity_smtp_form',
+                            'size' => 40
                         ),
                         'smtp_port' => array(
                             'type' => 'text',
@@ -154,12 +167,21 @@ class identity_smtp extends rcube_plugin
                         'smtp_user' => array(
                             'type' => 'text',
                             'label' => $this->gettext('smtp_user'),
-                            'class' => 'identity_smtp_form'
+                            'class' => 'identity_smtp_form',
+                            'size' => 40
                         ),
                         'smtp_pass' => array(
                             'type' => 'password',
                             'label' => $this->gettext('smtp_pass'),
-                            'class' => 'identity_smtp_form'
+                            'class' => 'identity_smtp_form',
+                            'size' => 40
+                        ),
+                        'smtp_pass2' => array(
+                            'type' => 'password',
+                            'label' => $this->gettext('smtp_pass2'),
+                            'class' => 'identity_smtp_form',
+                            'placeholder' => 'test',
+                            'size' => 40
                         )
                     )
                 )
@@ -185,14 +207,14 @@ class identity_smtp extends rcube_plugin
     // This function is called when a new identity is created. We want to use the default smtp server here
     function identityWasCreated($args)
     {
-        $this->saveSmtpSettings($args);
+        $args = $this->saveSmtpSettings($args);
         return $args;
     }
 
     // This function is called when the users saves a changed identity. It is responsible for saving the smtp settings
     function identityWasUpdated($args)
     {
-        $this->saveSmtpSettings($args);
+        $args = $this->saveSmtpSettings($args);
         return $args;
     }
 
