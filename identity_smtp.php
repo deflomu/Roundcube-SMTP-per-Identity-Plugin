@@ -47,10 +47,6 @@ class identity_smtp extends rcube_plugin
             $this,
             'identityWasDeleted'
         ));
-        $this->add_hook('template_object_identityform', array(
-            $this,
-            'template_object_identityform'
-        ));
     }
 
     function smtpLog($message)
