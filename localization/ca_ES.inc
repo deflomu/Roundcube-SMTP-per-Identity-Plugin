@@ -8,5 +8,6 @@ $labels['smtp_port'] = 'Port Servidor';
 $labels['smtp_user'] = 'Nom Usuari';
 $labels['smtp_pass'] = 'Contrassenya';
 $labels['smtp_settings_not_available'] = "Cal emmagatzemar primer, per a poder configurar l'accés SMTP.";
+$labels['smtp_passwords_mismatch'] = 'Les contrasenyes no coincideixen';
 
 ?>

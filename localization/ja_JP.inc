@@ -8,5 +8,6 @@ $labels['smtp_port'] = 'ポート';
 $labels['smtp_user'] = 'ユーザ名';
 $labels['smtp_pass'] = 'パスワード';
 $labels['smtp_settings_not_available'] = 'SMTP設定を編集するには最初に保存してください。';
+$labels['smtp_passwords_mismatch'] = 'パスワードが一致していません';
 
 ?>
