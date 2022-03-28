@@ -3,8 +3,7 @@
 $labels = array();
 $labels['smtp_settings_header'] = 'SMTP Einstellungen';
 $labels['use_default_smtp_server'] = 'Den voreingestellten SMTP Server verwenden';
-$labels['smtp_server'] = 'Server IP/Hostname. (Für Verschlüsselung Präfix ssl:// oder tls:// nutzen)';
-$labels['smtp_port'] = 'Server Port';
+$labels['smtp_server'] = 'Server IP/Hostname + Port (Für Verschlüsselung Präfix ssl:// oder tls:// nutzen)';
 $labels['smtp_user'] = 'Benutzername';
 $labels['smtp_pass'] = 'Passwort';
 $labels['smtp_pass2'] = 'Passwort wiederholen';
