@@ -121,7 +121,8 @@ class identity_smtp extends rcube_plugin
     function identityFormWillBeDisplayed($args)
     {
         $form   = $args['form'];
-        $record = $args['record'];
+        $record = isset($args['record']) ? $args['record'] : [];
+
 
         // Load the stored smtp settings
         $smtpSettingsRecord = $this->loadSmtpSettings($record);
