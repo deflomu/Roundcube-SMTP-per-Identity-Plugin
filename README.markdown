@@ -15,7 +15,7 @@ Manual Installation
 -------------------
 
     $ cd /path/to/roundcube/plugins
-    $ git clone https://github.com/CocytusServices/Roundcube-Identity-SMTP identity_smtp
+    $ git clone https://github.com/deflomu/Roundcube-Identity-SMTP identity_smtp
 
 The plugins folder must be named identity_smtp.
 
