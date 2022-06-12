@@ -8,6 +8,12 @@ than the servers default.
 Installation
 ============
 
+
+This plugin is available in the [packagist.org](https://packagist.org/packages/elm/identity_smtp).
+
+Manual Installation
+-------------------
+
     $ cd /path/to/roundcube/plugins
     $ git clone https://github.com/CocytusServices/Roundcube-Identity-SMTP identity_smtp
 
