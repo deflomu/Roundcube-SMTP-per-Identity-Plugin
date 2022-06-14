@@ -2,7 +2,7 @@
     "name": "elm/identity_smtp",
     "description": "Individual SMTP settings for every identity",
     "keywords": ["mail","smtp","settings","identity"],
-    "homepage": "https://github.com/elm/Roundcube-SMTP-per-Identity-Plugin",
+    "homepage": "https://github.com/deflomu/Roundcube-SMTP-per-Identity-Plugin",
     "type": "roundcube-plugin",
     "license": "MIT",
     "repositories": [

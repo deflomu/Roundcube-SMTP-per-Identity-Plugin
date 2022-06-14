@@ -81,8 +81,7 @@ class identity_smtp extends rcube_plugin
 
         $smtpSettingsRecord = array(
             'smtp_standard' => isset($smtp_standard),
-            'smtp_server' => rcube_utils::get_input_value('_smtp_server', rcube_utils::INPUT_POST),
-            'smtp_port' => rcube_utils::get_input_value('_smtp_port', rcube_utils::INPUT_POST),
+            'smtp_host' => rcube_utils::get_input_value('_smtp_host', rcube_utils::INPUT_POST),
             'smtp_user' => rcube_utils::get_input_value('_smtp_user', rcube_utils::INPUT_POST),
             'smtp_pass' => $password
         );
@@ -104,8 +103,7 @@ class identity_smtp extends rcube_plugin
         $id                 = intval($args['identity_id']);
         $smtpSettingsRecord = array(
             'smtp_standard' => $smtpSettings[$id]['smtp_standard'],
-            'smtp_server' => $smtpSettings[$id]['smtp_server'],
-            'smtp_port' => $smtpSettings[$id]['smtp_port'],
+            'smtp_host' => $smtpSettings[$id]['smtp_host'],
             'smtp_user' => $smtpSettings[$id]['smtp_user'],
             'smtp_pass' => $smtpSettings[$id]['smtp_pass'],
             'smtp_pass2' => $smtpSettings[$id]['smtp_pass']
@@ -150,16 +148,11 @@ class identity_smtp extends rcube_plugin
                             'label' => $this->gettext('use_default_smtp_server'),
                             'onclick' => 'identity_smtp_toggle_standard_server()'
                         ),
-                        'smtp_server' => array(
+                        'smtp_host' => array(
                             'type' => 'text',
-                            'label' => $this->gettext('smtp_server'),
+                            'label' => $this->gettext('smtp_host'),
                             'class' => 'identity_smtp_form',
                             'size' => 40
-                        ),
-                        'smtp_port' => array(
-                            'type' => 'text',
-                            'label' => $this->gettext('smtp_port'),
-                            'class' => 'identity_smtp_form'
                         ),
                         'smtp_user' => array(
                             'type' => 'text',
@@ -246,8 +239,7 @@ class identity_smtp extends rcube_plugin
             'identity_id' => $this->from_identity
         ));
         if (!$smtpSettings['smtp_standard'] && !is_null($smtpSettings['smtp_standard'])) {
-            $args['smtp_server'] = $smtpSettings['smtp_server'];
-            $args['smtp_port']   = $smtpSettings['smtp_port'];
+            $args['smtp_host']   = $smtpSettings['smtp_host'];
             $args['smtp_user']   = $smtpSettings['smtp_user'];
             $args['smtp_pass']   = rcmail::get_instance()->decrypt($smtpSettings['smtp_pass']);
         }
