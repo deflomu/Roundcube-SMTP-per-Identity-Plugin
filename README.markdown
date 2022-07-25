@@ -13,9 +13,10 @@ This plugin is available from [Packagist](https://packagist.org/packages/elm/ide
     $ git clone https://github.com/deflomu/Roundcube-SMTP-per-Identity-Plugin.git identity_smtp
 
 To use a specific version:
+
     $ git checkout 1.0.0-1.6
 
-    Replace `1.0.0-1.6` with any version found [here](https://github.com/deflomu/Roundcube-SMTP-per-Identity-Plugin/tags)
+Replace `1.0.0-1.6` with any version found [here](https://github.com/deflomu/Roundcube-SMTP-per-Identity-Plugin/tags)
 
 The plugins folder must be named identity_smtp.
 
