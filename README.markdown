@@ -14,9 +14,9 @@ This plugin is available from [Packagist](https://packagist.org/packages/elm/ide
 
 To use a specific version:
 
-    $ git checkout 1.0.0-1.6
+    $ git checkout 1.6.0
 
-Replace `1.0.0-1.6` with any version found [here](https://github.com/deflomu/Roundcube-SMTP-per-Identity-Plugin/tags)
+Replace `1.6.0` with any version found [here](https://github.com/deflomu/Roundcube-SMTP-per-Identity-Plugin/tags)
 
 The plugins folder must be named identity_smtp.
 
@@ -24,6 +24,11 @@ Add `identity_smtp` to `$rcmail_config['plugins']` in `config/main.inc.php`.
 
 A default SMTP server has to be set in `config/main.inc.php`, otherwise
 Roundcube will not call any SMTP function and the plugin will not work.
+
+## Versions
+
+Each version's Major + Minor will match the latest version of Roundcube that it's compatible with.
+If you cannot find a version for your install, use the closest-matching newer version.
 
 ## Usage
 
