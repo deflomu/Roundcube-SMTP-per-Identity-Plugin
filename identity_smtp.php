@@ -239,7 +239,7 @@ class identity_smtp extends rcube_plugin
             'identity_id' => $this->from_identity
         ));
         if (!$smtpSettings['smtp_standard'] && !is_null($smtpSettings['smtp_standard'])) {
-            $args['smtp_host']   = $smtpSettings['smtp_host'];
+            $args['smtp_server']   = $smtpSettings['smtp_host'];
             $args['smtp_user']   = $smtpSettings['smtp_user'];
             $args['smtp_pass']   = rcmail::get_instance()->decrypt($smtpSettings['smtp_pass']);
         }
